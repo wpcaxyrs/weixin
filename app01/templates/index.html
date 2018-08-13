@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>。。。</title>
+
+</head>
+<body>
+    <div>
+        <h1>欢迎{{ request.session.userinfo.name }}来到首页</h1>
+
+        <img src="/static/0.jpg" alt="" style="width: 200px;">
+        <h5>请扫码关注公众号！</h5>
+        <h5>发送微信id</h5>
+        <div id="qrcode" style="width: 200px;">
+        </div>
+    </div>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.qrcode.min.js"></script>
+    <script src="/static/js/qrcode.js"></script>
+    <script>
+        $(function () {
+            get_qcode();
+        });
+        function get_qcode(){
+            $.ajax({
+                url:'/get_qrcode/',
+                type:'GET',
+                dataType:'JSON',
+                success:function (arg) {
+                    $("#qrcode").empty().qrcode({text:arg.data});
+                }
+            })
+        }
+
+
+    </script>
+
+
+
+</body>
+</html>
